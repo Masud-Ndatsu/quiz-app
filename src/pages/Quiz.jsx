@@ -67,18 +67,18 @@ const Button = styled.button`
 const Quiz = () => {
   const [questions, setQuestions] = useState(data);
   const [count, setCount] = useState(0);
-  const [values, setValue] = useState({
-    answer: false,
-  });
 
-  console.log(values);
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(
-        "https://opentdb.com/api.php?amount=5&category=17&difficulty=easy&type=multiple"
-      );
-      if (res.data) {
-        setQuestions(res.data.results);
+      try {
+        const res = await axios.get(
+          "https://opentdb.com/api.php?amount=5&category=17&difficulty=easy&type=multiple"
+        );
+        if (res.data) {
+          setQuestions(res.data.results);
+        }
+      } catch (err) {
+        console.log(err);
       }
     }
     fetchData();
